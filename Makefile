@@ -2,7 +2,7 @@ APP=$(shell basename $(shell git remote get-url origin) | sed 's/\.git$$//')
 REGISTRY=astergam
 VERSION=$(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HEAD)
 TARGETOS=linux
-TARGETARCH=arm64
+TARGETARCH=amd64 #arm64 
 
 get:
 	go get
@@ -27,3 +27,4 @@ push:
 
 clean:
 	rm -rf kbot
+	docker rmi ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH}
