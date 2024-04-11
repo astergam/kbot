@@ -1,6 +1,7 @@
 APP=$(shell basename $(shell git remote get-url origin) | sed 's/\.git$$//')
 REGISTRY=astergam
-VERSION=$(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HEAD)
+#VERSION=$(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HEAD)
+VERSION=v1.0.6-$(shell git rev-parse --short HEAD)
 TARGETOS=linux
 TARGETARCH=amd64 #arm64 
 
