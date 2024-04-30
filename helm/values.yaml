@@ -1,0 +1,17 @@
+# Default values for helm.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+image:
+  repository: astergam
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "v1.0.2"
+  arch: amd64
+
+# Секція для токену TELE_TOKEN
+secret:
+  name: "kbot"
+  env: "TELE_TOKEN"
+  key: "token"
+securityContext:
+  privileged: true
