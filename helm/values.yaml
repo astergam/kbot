@@ -5,7 +5,7 @@
 image:
   repository: astergam
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v1.0.2"
+  tag: "v1.0.2-amd64"
   arch: amd64
 
 # Секція для токену TELE_TOKEN
