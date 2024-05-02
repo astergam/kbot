@@ -28,7 +28,7 @@ jobs:
 
   cd:
     name: CD
-    needs: ci
+    needs: CI
     runs-on: ubuntu-latest
 
     steps:
