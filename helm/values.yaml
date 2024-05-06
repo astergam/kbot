@@ -5,9 +5,8 @@
 image:
   repository: astergam
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v1.0.6-amd64"
+  tag: "v1.0.2-8ff945e"
   arch: amd64
-
 # Секція для токену TELE_TOKEN
 secret:
   name: "kbot"
