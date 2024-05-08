@@ -22,4 +22,4 @@ jobs:
           with:
             registry: ghcr.io
             username: ${{ secrets.USERNAME_GIT }}
-            passwords: ${{ secrets.TOKEN_GIT }}
+            password: ${{ secrets.TOKEN_GIT }}
