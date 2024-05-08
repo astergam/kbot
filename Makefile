@@ -2,7 +2,7 @@ APP=$(shell basename $(shell git remote get-url origin | sed 's/\.git$//'))
 REGISTRY="ghcr.io$/astergam"
 VERSION=$(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HEAD)
 TARGETOS=linux
-TARGETARCH=amd64
+TARGETARCH="amd64"
 
 get:
 	go get
