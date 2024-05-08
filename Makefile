@@ -1,8 +1,9 @@
-APP=$(shell basename $(shell git remote get-url origin | sed 's/\.git$//'))
+APP_NAME=$(shell basename $(shell git remote get-url origin))
+#APP_NAME=$(basename $(git remote get-url origin | sed 's/\.git$//'))
 REGISTRY="ghcr.io$/astergam"
 VERSION=$(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HEAD)
 TARGETOS=linux
-TARGETARCH="amd64"
+TARGETARCH=amd64
 
 get:
 	go get
@@ -21,20 +22,15 @@ build: format get
 
 image:
 	echo "see that:"
-	echo "${REGISTRY}"
-	echo "${APP}"
-	echo "${VERSION}"
-	echo "${TARGETOS}"
-	echo "${TARGETARCH}"
-	echo "${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH} --build-arg TARGETOS=${TARGETOS} ."
-	docker build -t ${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH} --build-arg TARGETOS=${TARGETOS} .
+	echo "${REGISTRY}/${APP_NAME}:${VERSION}-${TARGETOS}-${TARGETARCH} --build-arg TARGETOS=${TARGETOS} ."
+	docker build -t ${REGISTRY}/${APP_NAME}:${VERSION}-${TARGETOS}-${TARGETARCH} --build-arg TARGETOS=${TARGETOS} .
 
 push:
-	docker push ${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH}
+	docker push ${REGISTRY}/${APP_NAME}:${VERSION}-${TARGETOS}-${TARGETARCH}
 
 clean:
 	rm -rf kbot
-	docker rmi ${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH}
+	docker rmi ${REGISTRY}/${APP_NAME}:${VERSION}-${TARGETOS}-${TARGETARCH}
 
 show:
 	echo ${VERSION}
