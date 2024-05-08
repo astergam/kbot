@@ -1,10 +1,10 @@
-APP=$(shell basename $(shell git remote get-url origin) | sed 's/\.git$//')
-REGISTRY=ghcr.io/astergam
-VERSION=$(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HEAD)
+APP=$(basename $(git remote get-url origin | sed 's/\.git$//'))
+REGISTRY=astergam
+VERSION=$(git describe --tags --abbrev=0)-$(git rev-parse --short HEAD)
 #VERSION=v1.0.6-$(shell git rev-parse --short HEAD)
 TARGETOS=linux
 TARGETARCH=amd64
-IMAGENAME := ${REGISTRY}/${APP}:${VERSION}-${OS}-${ARCH}
+IMAGENAME := ${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH}
 
 get:
 	go get
@@ -23,14 +23,14 @@ build: format
 	CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -v -o kbot -ldflags "-X="https://github.com/astergam/kbot/cmd.appVersion=${VERSION}
 
 image:
-	docker build . -t ${IMAGENAME}
+	docker build . -t ${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH}  --build-arg TARGETARCH=${TARGETARCH}
 
 push:
-	docker push ${IMAGENAME}
+	docker push ${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH}
 
 clean:
 	rm -rf kbot
-	docker rmi ${IMAGENAME}
+	docker rmi ${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH}
 
 show:
 	echo ${VERSION}
