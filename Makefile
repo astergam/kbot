@@ -4,7 +4,7 @@ VERSION=$(git describe --tags --abbrev=0)-$(git rev-parse --short HEAD)
 #VERSION=v1.0.6-$(shell git rev-parse --short HEAD)
 TARGETOS=linux
 TARGETARCH=amd64
-IMAGENAME := ${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH}
+#IMAGENAME := ${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH}
 
 get:
 	go get
@@ -26,11 +26,11 @@ image:
 	docker build . -t ${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH}  --build-arg TARGETARCH=${TARGETARCH}
 
 push:
-	docker push ${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH}
+	docker push ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH}
 
 clean:
 	rm -rf kbot
-	docker rmi ${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH}
+	docker rmi ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH}
 
 show:
 	echo ${VERSION}
