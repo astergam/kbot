@@ -18,8 +18,9 @@ lint:
 test:
 	go test -v
 
-build: format get
-	CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -v -o kbot -ldflags "-X="github.com/astergam/kbot/cmd.appVersion=${VERSION}
+build: format
+	go get gopkg.in/telebot.v3
+	CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -v -o kbot -ldflags "-X="https://github.com/astergam/kbot/cmd.appVersion=${VERSION}
 
 image:
 	docker build . -t ${IMAGENAME}
