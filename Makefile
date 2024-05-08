@@ -1,13 +1,13 @@
 APP=$(shell basename $(shell git remote get-url origin | sed 's/\.git$//'))
-echo "${APP}"
+#echo "${APP}"
 REGISTRY=ghcr.io/astergam
-echo "${REGISTRY}"
+#echo "${REGISTRY}"
 VERSION=$(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HEAD)
-echo "${VERSION}"
+#echo "${VERSION}"
 TARGETOS=linux
-echo "${TARGETOS}"
+#echo "${TARGETOS}"
 TARGETARCH=amd64
-echo "${TARGETARCH}"
+#echo "${TARGETARCH}"
 
 get:
 	go get
@@ -26,6 +26,11 @@ build: format get
 
 image:
 	echo "see that:"
+	echo "${REGISTRY}"
+	echo "${APP}"
+	echo "${VERSION}"
+	echo "${TARGETOS}"
+	echo "${TARGETARCH}"
 	echo "${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH} --build-arg TARGETOS=${TARGETOS} ."
 	docker build -t ${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH} --build-arg TARGETOS=${TARGETOS} .
 
