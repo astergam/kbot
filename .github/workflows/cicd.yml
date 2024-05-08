@@ -29,5 +29,5 @@ jobs:
         - name: Build&Push
           env:
             APP: "kbot"
-            REGISTRY: ${{ secrets.USERNAME_GIT }}
+            REGISTRY: "ghcr.io/astergam"
           run: make image push
