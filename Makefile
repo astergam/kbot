@@ -1,13 +1,8 @@
 APP=$(shell basename $(shell git remote get-url origin | sed 's/\.git$//'))
-#echo "${APP}"
-REGISTRY=ghcr.io/astergam
-#echo "${REGISTRY}"
+REGISTRY="ghcr.io$/astergam"
 VERSION=$(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HEAD)
-#echo "${VERSION}"
 TARGETOS=linux
-#echo "${TARGETOS}"
 TARGETARCH=amd64
-#echo "${TARGETARCH}"
 
 get:
 	go get
