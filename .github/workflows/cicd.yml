@@ -22,12 +22,12 @@ jobs:
         - name: 'Login to GitHub'
           uses: docker/login-action@v3
           with:
-            registry: ghcr.io
+            registry: "ghcr.io"
             username: ${{ secrets.USERNAME_GIT }}
             password: ${{ secrets.TOKEN_GIT }}
         
         - name: Build&Push
           env:
             APP: "kbot"
-            REGISTY: ${{ secrets.USERNAME_GIT }}
+            REGISTRY: ${{ secrets.USERNAME_GIT }}
           run: make image push
