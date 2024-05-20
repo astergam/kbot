@@ -6,7 +6,7 @@ image:
   registry: "ghcr.io"
   repository: "astergam/kbot"
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v1.0.5-292d2b2"
+  tag: "v1.0.5-26ed28c"
   os: "linux"
   arch: "amd64"
 # Секція для токену TELE_TOKEN
