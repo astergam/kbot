@@ -4,7 +4,7 @@ VERSION=$(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HE
 #VERSION=v1.0.6-$(shell git rev-parse --short HEAD)
 TARGETOS=linux
 TARGETARCH=amd64
-IMAGENAME := ${REGISTRY}/${APP}:${VERSION}-${OS}-${ARCH}
+IMAGENAME := ${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH}
 
 get:
 	go get
@@ -18,8 +18,24 @@ lint:
 test:
 	go test -v
 
-build: format get
-	CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -v -o kbot -ldflags "-X="github.com/astergam/kbot/cmd.appVersion=${VERSION}
+arm: format
+	go get gopkg.in/kbot
+	CGO_ENABLED=0 GOOS=android GOARCH=${TARGETARCH} go build -v -o kbot -ldflags "-X="github.com/astergam/kbot/cmd.appVersion=${VERSION}
+
+windows: format
+	go get gopkg.in/kbot
+	CGO_ENABLED=0 GOOS=windows GOARCH=${TARGETARCH} go build -v -o kbot -ldflags "-X="github.com/astergam/kbot/cmd.appVersion=${VERSION}
+
+macos: format
+	go get gopkg.in/kbot
+	CGO_ENABLED=0 GOOS=darwin GOARCH=${TARGETARCH} go build -v -o kbot -ldflags "-X="github.com/astergam/kbot/cmd.appVersion=${VERSION}
+
+linux: format
+	go get gopkg.in/kbot
+	CGO_ENABLED=0 GOOS=linux GOARCH=${TARGETARCH} go build -v -o kbot -ldflags "-X="github.com/astergam/kbot/cmd.appVersion=${VERSION}
+
+# build: format get
+# 	CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -v -o kbot -ldflags "-X="github.com/astergam/kbot/cmd.appVersion=${VERSION}
 
 image:
 	docker build . -t ${IMAGENAME}
