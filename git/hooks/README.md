@@ -1,7 +1,9 @@
+- 1. Зразок вдалого проходження тестів
 ![apply_pre-commit](apply_pre-commit.png)
+- 2. Зразок невдалого проходження тестів
 ![failed_pre-commit](failed_pre-commit.png)
+- 3. Код пре-коміта
 ```[code]
-
 # Отримання значення конфігурації git для hooks.gitleaks
 ENABLE_GITLEAKS=$(git config --bool hooks.gitleaks)
 
